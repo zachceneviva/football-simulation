@@ -91,7 +91,8 @@ const gameData = {
     yardsToTD: 0,
     lineToGain: 0,
     yardsToFirstDown: 0,
-    down: 1
+    down: 0,
+    displayDown: ['1st', '2nd', '3rd', '4th'],
     quarter: ['1st', '2nd', '3rd', '4th'],
     time: '15:00',
     team1Score: 0,
@@ -136,7 +137,7 @@ let yardageGained = 0
 $choosePlay1.click(function () {
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
-    if (randomNumForSuccess < 0.5) {
+    if (randomNumForSuccess < team1.quarterback[0].longThrowAccuracy) {
         console.log('Completed throw.');
         randomNumForYards = (Math.random() * (1.001 - 0) + 0);
         if (randomNumForYards <= 0.8) {
@@ -152,10 +153,14 @@ $choosePlay1.click(function () {
                 gameData.lineToGain = gameData.yardLine + 10;
                 gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
                 gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
                 $team1Score.html(`${gameData.team1Score}`)
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`)
+                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
@@ -171,10 +176,14 @@ $choosePlay1.click(function () {
                 gameData.lineToGain = gameData.yardLine + 10;
                 gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
                 gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
                 $team1Score.html(`${gameData.team1Score}`)
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`)
+                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
@@ -190,14 +199,20 @@ $choosePlay1.click(function () {
                 gameData.lineToGain = gameData.yardLine + 10;
                 gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
                 gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
                 $team1Score.html(`${gameData.team1Score}`)
             }
             else {
-            $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`)
+            $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+            gameData.down = 0;
+            $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
             }
         }
     }
     else {
-        $playScript.html(`The pass was incomplete.`)
+        $playScript.html(`The pass was incomplete.`);
+        gameData.down += 1
+        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
     }
 })
