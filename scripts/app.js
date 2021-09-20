@@ -86,28 +86,53 @@ const team2 = {
     }
 }
 
-
 const gameData = {
     yardLine: 20,
     yardsToTD: 0,
     lineToGain: 0,
     yardsToFirstDown: 0,
-    down: ['1st', '2nd', '3rd', '4th'],
+    down: 1
     quarter: ['1st', '2nd', '3rd', '4th'],
     time: '15:00',
     team1Score: 0,
     team2Score: 0,
 }
 
-const $choosePlay1 = $('#choose-play1')
-const $playScript = $('.play-script')
-const $team1Player1 = $('#team1-player1')
-const $team1Player2 = $('#team1-player1')
+const $quarterTime = $('#quarter-time')
+const $downYardage = $('#down-yardage')
 const $team1Score = $('#team1-score')
+const $team2Score = $('#team2-score')
+const $team1 = $('#team1')
+const $team2 = $('#team2')
+const $choosePlay1 = $('#choose-play1')
+const $choosePlay2 = $('#choose-play2')
+const $choosePlay3 = $('#choose-play3')
+const $choosePlay4 = $('#choose-play4')
+const $playScript = $('.play-script')
+const $team1Name = $('#team1-name')
+const $team1Player1 = $('#team1-player1')
+const $team1Player2 = $('#team1-player2')
+const $team1Player3 = $('#team1-player3')
+const $team1Player4 = $('#team1-player4')
+const $team1Player5 = $('#team1-player5')
+const $team1Player6 = $('#team1-player6')
+const $team1Player7 = $('#team1-player7')
+const $team1Player8 = $('#team1-player8')
+const $team2Name = $('#team2-name')
+const $team2Player1 = $('#team2-player1')
+const $team2Player2 = $('#team2-player2')
+const $team2Player3 = $('#team2-player3')
+const $team2Player4 = $('#team2-player4')
+const $team2Player5 = $('#team2-player5')
+const $team2Player6 = $('#team2-player6')
+const $team2Player7 = $('#team2-player7')
+const $team2Player8 = $('#team2-player8')
+const $football = $('#football')
 
 let randomNumForSuccess= 0
 let randomNumForYards = 0
 let yardageGained = 0
+
 $choosePlay1.click(function () {
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
