@@ -216,3 +216,86 @@ $choosePlay1.click(function () {
         $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
     }
 })
+
+$choosePlay2.click(function () {
+    randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
+    console.log(randomNumForSuccess)
+    if (randomNumForSuccess < team1.quarterback[0].mediumThrowAccuracy) {
+        console.log('Completed throw.');
+        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+        if (randomNumForYards <= 0.8) {
+            yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.lineToGain = gameData.yardLine + 10;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+        else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+            yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.lineToGain = gameData.yardLine + 10;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+        else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+            yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.lineToGain = gameData.yardLine + 10;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+            $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+            gameData.down = 0;
+            $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+    }
+    else {
+        $playScript.html(`The pass was incomplete.`);
+        gameData.down += 1
+        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+    }
+})
