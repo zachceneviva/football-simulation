@@ -113,10 +113,10 @@ const $team1Score = $('#team1-score')
 const $team2Score = $('#team2-score')
 const $team1 = $('#team1')
 const $team2 = $('#team2')
-const $choosePlay1 = $('#choose-play1')
-const $choosePlay2 = $('#choose-play2')
-const $choosePlay3 = $('#choose-play3')
-const $choosePlay4 = $('#choose-play4')
+const $chooseOffensivePlay1 = $('#choose-offensive-play1')
+const $chooseOffensivePlay2 = $('#choose-offensive-play2')
+const $chooseOffensivePlay3 = $('#choose-offensive-play3')
+const $chooseOffensivePlay4 = $('#choose-offensive-play4')
 const $playScript = $('.play-script')
 const $team1Name = $('#team1-name')
 const $team1Player1 = $('#team1-player1')
@@ -162,7 +162,7 @@ function computerDefense () {
 }
 
 
-$choosePlay1.click(function () {
+$chooseOffensivePlay1.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
@@ -322,7 +322,7 @@ $choosePlay1.click(function () {
 })
 
 
-$choosePlay2.click(function () {
+$chooseOffensivePlay2.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
@@ -481,7 +481,7 @@ $choosePlay2.click(function () {
     }
 })
 
-$choosePlay3.click(function () {
+$chooseOffensivePlay3.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
@@ -641,7 +641,7 @@ $choosePlay3.click(function () {
 })
 
 
-$choosePlay4.click(function () {
+$chooseOffensivePlay4.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
     console.log(randomNumForSuccess)
