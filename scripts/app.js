@@ -83,7 +83,6 @@ const team2 = {
         defendShortThrow: 0.75,
         defendMediumThrow: 0.70,
         defendLongThrow: 0.60,
-        defensiveSelection: ['Defend Long Throw', 'Defend Medium Throw', 'Defend Short Throw', 'Defend Run']
     }
 }
 
@@ -99,6 +98,7 @@ const gameData = {
     time: 120000,
     team1Score: 0,
     team2Score: 0,
+    possession: 0,
 }
 
 // setTimeout(function () {
@@ -117,6 +117,10 @@ const $chooseOffensivePlay1 = $('#choose-offensive-play1')
 const $chooseOffensivePlay2 = $('#choose-offensive-play2')
 const $chooseOffensivePlay3 = $('#choose-offensive-play3')
 const $chooseOffensivePlay4 = $('#choose-offensive-play4')
+const $chooseDefensivePlay1 = $('#choose-defensive-play1')
+const $chooseDefensivePlay2 = $('#choose-defensive-play2')
+const $chooseDefensivePlay3 = $('#choose-defensive-play3')
+const $chooseDefensivePlay4 = $('#choose-defensive-play4')
 const $playScript = $('.play-script')
 const $team1Name = $('#team1-name')
 const $team1Player1 = $('#team1-player1')
@@ -141,12 +145,11 @@ const $football = $('#football')
 let randomNumForSuccess= 0
 let randomNumForYards = 0
 let yardageGained = 0
-let computerDefensiveSelection = null
 let computerRandomNum = 0
+
 
 function computerDefense () {
     computerRandomNum = Math.floor(Math.random () * (4));
-    computerDefensiveSelection = team2.defense.defensiveSelection[computerRandomNum]
     if (computerRandomNum === 0) {
         console.log(`The defense selected to defend the long throw.`)
     }
@@ -161,6 +164,32 @@ function computerDefense () {
     }
 }
 
+function computerOffense () {
+    computerRandomNum = Math.floor(Math.random () * (4));
+    if (computerRandomNum === 0) {
+        console.log(`The offense selected to throw it deep.`)
+    }
+    else if (computerRandomNum === 1) {
+        console.log(`The offense selected a medium throw.`)
+    }
+    else if (computerRandomNum === 2) {
+        console.log(`The offense selected to throw it short.`)
+    }
+    else if (computerRandomNum === 3) {
+        console.log(`The offense selected to run.`)
+    }
+}
+
+function changePossession () {
+    if (gameData.possession === 0) {
+        $('.select-offensive-play').css('visibility', 'visible')
+        $('.select-defensive-play').css('visibility', 'hidden')
+    }
+    else if (gameData.possession === 1) {
+        $('.select-offensive-play').css('visibility', 'hidden')
+        $('.select-defensive-play').css('visibility', 'visible')
+    }
+}
 
 $chooseOffensivePlay1.click(function () {
     computerDefense ();
@@ -182,7 +211,9 @@ $chooseOffensivePlay1.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -205,7 +236,9 @@ $chooseOffensivePlay1.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -228,7 +261,9 @@ $chooseOffensivePlay1.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -256,7 +291,9 @@ $chooseOffensivePlay1.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -279,7 +316,9 @@ $chooseOffensivePlay1.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -302,7 +341,9 @@ $chooseOffensivePlay1.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -342,7 +383,9 @@ $chooseOffensivePlay2.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -365,7 +408,9 @@ $chooseOffensivePlay2.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -388,7 +433,9 @@ $chooseOffensivePlay2.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -416,7 +463,9 @@ $chooseOffensivePlay2.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -439,7 +488,9 @@ $chooseOffensivePlay2.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -462,7 +513,9 @@ $chooseOffensivePlay2.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -501,7 +554,9 @@ $chooseOffensivePlay3.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -523,7 +578,9 @@ $chooseOffensivePlay3.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -545,7 +602,9 @@ $chooseOffensivePlay3.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -572,7 +631,9 @@ $chooseOffensivePlay3.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -594,7 +655,9 @@ $chooseOffensivePlay3.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -616,7 +679,9 @@ $chooseOffensivePlay3.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -661,7 +726,9 @@ $chooseOffensivePlay4.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -683,7 +750,9 @@ $chooseOffensivePlay4.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -705,7 +774,9 @@ $chooseOffensivePlay4.click(function () {
                     gameData.team1Score += 7
                     gameData.down = 0;
                     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`)
+                    $team1Score.html(`${gameData.team1Score}`);
+                    gameData.possession = 1;
+                    changePossession ();
                 }
                 else {
                     $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -732,7 +803,9 @@ $chooseOffensivePlay4.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -754,7 +827,9 @@ $chooseOffensivePlay4.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -776,7 +851,9 @@ $chooseOffensivePlay4.click(function () {
                 gameData.team1Score += 7
                 gameData.down = 0;
                 $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`)
+                $team1Score.html(`${gameData.team1Score}`);
+                gameData.possession = 1;
+                changePossession ();
             }
             else {
                 $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
