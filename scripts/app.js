@@ -617,14 +617,14 @@ function successfulRun () {
 }
 
 function unsuccessfulRun () {
+    gameData.down += 1
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran for no gain.`);
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran for no gain.`);
     }
-    gameData.down += 1
-    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
 }
 
 function incompleteThrow () {
@@ -1005,9 +1005,6 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
-                    if (gameData.down > 3) {
-                        turnoverOnDowns ();
-                    }
                 }
             }
             else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
@@ -1018,9 +1015,6 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
-                    if (gameData.down > 3) {
-                        turnoverOnDowns ();
-                    }
                 }
             }
             else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
@@ -1031,17 +1025,11 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
-                    if (gameData.down > 3) {
-                        turnoverOnDowns ();
-                }
             }
         }
-        else {
-            unsuccessfulRun ();
-            if (gameData.down > 3) {
-                turnoverOnDowns ();
-            }
-        }
+    }
+    else {
+        unsuccessfulRun ();
     }
 }
     else if (randomNumForSuccess < team1.runningback[0].runAbility) {
@@ -1089,12 +1077,12 @@ $chooseOffensivePlay4.click(function () {
     }
     else {
         unsuccessfulRun ();
-        if (gameData.down > 3) {
-            turnoverOnDowns ();
-        }
     }
     if (gameData.yardsToFirstDown <= 0) {
         firstDown ();
+    }
+    if (gameData.down > 3) {
+        turnoverOnDowns ();
     }
 });
 
