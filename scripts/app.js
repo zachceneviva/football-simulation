@@ -191,6 +191,79 @@ function changePossession () {
     }
 }
 
+function firstDown () {
+    gameData.down = 0;
+    gameData.lineToGain = gameData.yardLine + 10;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+}
+
+function completedFirstDownThrow () {
+    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+    gameData.yardsToTD = 100 - gameData.yardLine;
+    gameData.lineToGain = gameData.yardLine + 10;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    gameData.down = 0;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+}
+
+function completedThrow () {
+    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+    gameData.yardsToTD = 100 - gameData.yardLine;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    gameData.down += 1;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
+}
+
+function successfulRun () {
+    $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+    gameData.yardsToTD = 100 - gameData.yardLine;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    gameData.down += 1;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+}
+
+function unsuccessfulRun () {
+    $playScript.html(`${team1.runningback[0].name} ran for no gain.`);
+        gameData.down += 1
+        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
+}
+
+function incompleteThrow () {
+    $playScript.html(`The pass was incomplete.`);
+    gameData.down += 1
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+}
+
+function touchdownPass () {
+    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+    gameData.yardLine = 20;
+    gameData.yardsToTD = 100 - gameData.yardLine;
+    gameData.lineToGain = gameData.yardLine + 10;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    gameData.team1Score += 7
+    gameData.down = 0;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+    $team1Score.html(`${gameData.team1Score}`);
+    gameData.possession = 1;
+    changePossession ();
+}
+
+function touchdownRun () {
+    $playScript.html(`${team1.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+    gameData.yardLine = 20;
+    gameData.yardsToTD = 100 - gameData.yardLine;
+    gameData.lineToGain = gameData.yardLine + 10;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    gameData.team1Score += 7
+    gameData.down = 0;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+    $team1Score.html(`${gameData.team1Score}`);
+    gameData.possession = 1;
+    changePossession ();
+}
+
+
 $chooseOffensivePlay1.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
@@ -203,77 +276,35 @@ $chooseOffensivePlay1.click(function () {
                 yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ()
                 }
             }
             else if (randomNumForYards > .8 && randomNumForYards <= .9) {
                 yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ()
                 }
             }
             else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
                 yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ()
                 }
             }
+        }
+        else {
+            incompleteThrow ();
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].longThrowAccuracy) {
@@ -283,82 +314,35 @@ $chooseOffensivePlay1.click(function () {
             yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ()
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
             yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ()
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
             yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it deep to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ()
             }
         }
     }
     else {
-        $playScript.html(`The pass was incomplete.`);
-        gameData.down += 1
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        incompleteThrow ()
     }
 })
 
@@ -375,77 +359,35 @@ $chooseOffensivePlay2.click(function () {
                 yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ();
                 }
             }
             else if (randomNumForYards > .8 && randomNumForYards <= .9) {
                 yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ();
                 }
             }
             else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
                 yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedFirstDownThrow ();
                 }
             }
+        }
+        else {
+            incompleteThrow ();
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].mediumThrowAccuracy) {
@@ -455,82 +397,35 @@ $chooseOffensivePlay2.click(function () {
             yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ();
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
             yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ();
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
             yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedFirstDownThrow ();
             }
         }
     }
     else {
-        $playScript.html(`The pass was incomplete.`);
-        gameData.down += 1
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        incompleteThrow ();
     }
 })
 
@@ -546,74 +441,35 @@ $chooseOffensivePlay3.click(function () {
                 yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedThrow ();
                 }
             }
             else if (randomNumForYards > .8 && randomNumForYards <= .9) {
                 yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedThrow ();
                 }
             }
             else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
                 yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownPass ();
                 }
                 else {
-                    $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    completedThrow ();
                 }
             }
+        }
+        else {
+            incompleteThrow ();
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].shortThrowAccuracy) {
@@ -623,85 +479,38 @@ $chooseOffensivePlay3.click(function () {
             yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedThrow ();
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
             yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedThrow ();
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
             yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownPass ();
             }
             else {
-                $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                completedThrow ();
             }
         }
     }
     else {
-        $playScript.html(`The pass was incomplete.`);
-        gameData.down += 1
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        incompleteThrow ();
     }
     if (gameData.yardsToFirstDown <= 0) {
-        gameData.down = 0;
-        gameData.lineToGain = gameData.yardLine + 10;
-        gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        firstDown ();
     }
 })
 
@@ -718,74 +527,35 @@ $chooseOffensivePlay4.click(function () {
                 yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownRun ();
                 }
                 else {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    successfulRun ();
                 }
             }
             else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
                 yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownRun ();
                 }
                 else {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    successfulRun ();
                 }
             }
             else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
                 yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                    gameData.yardLine = 20;
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.lineToGain = gameData.yardLine + 10;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.team1Score += 7
-                    gameData.down = 0;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                    $team1Score.html(`${gameData.team1Score}`);
-                    gameData.possession = 1;
-                    changePossession ();
+                    touchdownRun ();
                 }
                 else {
-                    $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                    gameData.yardsToTD = 100 - gameData.yardLine;
-                    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                    gameData.down += 1;
-                    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                    successfulRun ();
                 }
             }
+        }
+        else {
+            unsuccessfulRun ();
         }
     }
     else if (randomNumForSuccess < team1.runningback[0].runAbility) {
@@ -795,84 +565,37 @@ $chooseOffensivePlay4.click(function () {
             yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownRun ();
             }
             else {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                successfulRun ();
             }
         }
         else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
             yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownRun ();
             }
             else {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                successfulRun ();
             }
         }
         else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
             yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
             gameData.yardLine += yardageGained;
             if (gameData.yardLine >= 100) {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-                gameData.yardLine = 20;
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.lineToGain = gameData.yardLine + 10;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.team1Score += 7
-                gameData.down = 0;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
-                $team1Score.html(`${gameData.team1Score}`);
-                gameData.possession = 1;
-                changePossession ();
+                touchdownRun ();
             }
             else {
-                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-                gameData.yardsToTD = 100 - gameData.yardLine;
-                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-                gameData.down += 1;
-                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                successfulRun ();
             }
         }
     }
     else {
-        $playScript.html(`${team1.runningback[0].name} ran for no gain.`);
-        gameData.down += 1
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        unsuccessfulRun ();
     }
     if (gameData.yardsToFirstDown <= 0) {
-        gameData.down = 0;
-        gameData.lineToGain = gameData.yardLine + 10;
-        gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
-        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+        firstDown ();
     }
 })
