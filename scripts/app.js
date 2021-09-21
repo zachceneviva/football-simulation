@@ -385,3 +385,90 @@ $choosePlay3.click(function () {
         $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
     }
 })
+
+
+$choosePlay4.click(function () {
+    randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
+    console.log(randomNumForSuccess)
+    if (randomNumForSuccess < team1.runningback[0].runAbility) {
+        console.log('Run for positive yards.');
+        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+        if (randomNumForYards <= 0.75) {
+            yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+                gameData.down += 1;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+        else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
+            yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+                gameData.down +=1;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+        else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
+            yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
+            gameData.yardLine += yardageGained;
+            gameData.yardsToTD = 100 - gameData.yardLine;
+            gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+            if (gameData.yardLine >= 100) {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard TOUCHDOWN!!!!!!!`)
+                gameData.yardLine = 20;
+                gameData.yardsToTD = 100 - gameData.yardLine;
+                gameData.lineToGain = gameData.yardLine + 10;
+                gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+                gameData.team1Score += 7
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+                $team1Score.html(`${gameData.team1Score}`)
+            }
+            else {
+                $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+                gameData.down = 0;
+                $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+            }
+        }
+    }
+    else {
+        $playScript.html(`${team1.runningback[0].name} ran for no gain.`);
+        gameData.down += 1
+        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+    }
+    if (gameData.yardsToFirstDown <= 0) {
+        gameData.down = 0;
+        gameData.lineToGain = gameData.yardLine + 10;
+        gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+        $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
+    }
+})
