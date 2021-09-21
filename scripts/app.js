@@ -146,6 +146,7 @@ let randomNumForSuccess= 0
 let randomNumForYards = 0
 let yardageGained = 0
 let computerRandomNum = 0
+let userDefensivePlay = 0
 
 
 function computerDefense () {
@@ -168,17 +169,394 @@ function computerOffense () {
     computerRandomNum = Math.floor(Math.random () * (4));
     if (computerRandomNum === 0) {
         console.log(`The offense selected to throw it deep.`)
+        if (userDefensivePlay === 0) {
+            if (randomNumForSuccess < team2.quarterback[0].longThrowAccuracy / 2) {
+                console.log('Completed throw.');
+                randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+                if (randomNumForYards <= 0.8) {
+                    yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedFirstDownThrow ()
+                    }
+                }
+                else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                    yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedFirstDownThrow ()
+                    }
+                }
+                else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                    yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass();
+                    }
+                    else {
+                        completedFirstDownThrow ()
+                    }
+                }   
+            }
+            else {
+                incompleteThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
+            }
+        }
+        else if (randomNumForSuccess < team2.quarterback[0].longThrowAccuracy) {
+            console.log('Completed throw.');
+            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+            if (randomNumForYards <= 0.8) {
+                yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ()
+                }
+            }
+            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ()
+                }
+            }
+            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ()
+            }   
+            }
+        }
+        else {
+            incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
+        }
     }
-    else if (computerRandomNum === 1) {
+
+    if (computerRandomNum === 1) {
         console.log(`The offense selected a medium throw.`)
-    }
-    else if (computerRandomNum === 2) {
+        if (userDefensivePlay === 1) {
+            if (randomNumForSuccess < team2.quarterback[0].mediumThrowAccuracy / 2) {
+                console.log('Completed throw.');
+                randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+                if (randomNumForYards <= 0.8) {
+                    yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedFirstDownThrow ();
+                    }
+                }
+                else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                    yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedFirstDownThrow ();
+                    }
+                }
+                else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                    yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedFirstDownThrow ();
+                    }
+                }
+            }
+            else {
+                incompleteThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                    }
+                }
+            }
+        else if (randomNumForSuccess < team2.quarterback[0].mediumThrowAccuracy) {
+            console.log('Completed throw.');
+            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+            if (randomNumForYards <= 0.8) {
+                yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ();
+                }
+            }
+            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ();
+                }
+            }
+            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedFirstDownThrow ();
+                }
+            }
+        }
+        else {
+            incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
+        }
+    }   
+
+    if (computerRandomNum === 2) {
         console.log(`The offense selected to throw it short.`)
-    }
-    else if (computerRandomNum === 3) {
+        if (userDefensivePlay === 2) {
+            if (randomNumForSuccess < team2.quarterback[0].shortThrowAccuracy / 2) {
+                console.log('Completed throw.');
+                randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+                if (randomNumForYards <= 0.8) {
+                    yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedThrow ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+                else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                    yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedThrow ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+                else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                    yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownPass ();
+                    }
+                    else {
+                        completedThrow ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+            }
+            else {
+                incompleteThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
+            }
+        }
+        else if (randomNumForSuccess < team2.quarterback[0].shortThrowAccuracy) {
+            console.log('Completed throw.');
+            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+            if (randomNumForYards <= 0.8) {
+                yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+                yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
+                yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownPass ();
+                }
+                else {
+                    completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+        }
+        else {
+            incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
+        }
+        if (gameData.yardsToFirstDown <= 0) {
+            firstDown ();
+        }
+    }  
+    if (computerRandomNum === 3) {
         console.log(`The offense selected to run.`)
+        if (userDefensivePlay === 3) {
+            if (randomNumForSuccess < team2.runningback[0].runAbility / 2) {
+                console.log('Run for positive yards.');
+                randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+                if (randomNumForYards <= 0.75) {
+                    yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownRun ();
+                    }
+                    else {
+                        successfulRun ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+                else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
+                    yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownRun ();
+                    }
+                    else {
+                        successfulRun ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+                else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
+                    yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
+                    gameData.yardLine += yardageGained;
+                    if (gameData.yardLine >= 100) {
+                        touchdownRun ();
+                    }
+                    else {
+                        successfulRun ();
+                        if (gameData.down > 3) {
+                            turnoverOnDowns ();
+                        }
+                    }
+                }
+            }
+            else {
+                unsuccessfulRun ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
+            }
+        }
+        else if (randomNumForSuccess < team2.runningback[0].runAbility) {
+            console.log('Run for positive yards.');
+            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
+            if (randomNumForYards <= 0.75) {
+                yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownRun ();
+                }
+                else {
+                    successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+            else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
+                yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownRun ();
+                }
+                else {
+                    successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+            else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
+                yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
+                gameData.yardLine += yardageGained;
+                if (gameData.yardLine >= 100) {
+                    touchdownRun ();
+                }
+                else {
+                    successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
+                }
+            }
+        }
+        else {
+            unsuccessfulRun ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
+        }
+        if (gameData.yardsToFirstDown <= 0) {
+            firstDown ();
+        }
     }
 }
+
+
+
+
+
 
 function changePossession () {
     if (gameData.possession === 0) {
@@ -307,6 +685,22 @@ function touchdownRun () {
     changePossession ();
 }
 
+function turnoverOnDowns () {
+    if (gameData.possession === 0) {
+        gameData.possession === 1;
+        changePossession ();
+    }
+    else if (gameData.possession ===1) {
+        gameData.possession === 0;
+        changePossession ();
+    }
+    gameData.down = 0;
+    gameData.yardLine = 100 - gameData.yardLine;
+    gameData.yardsToTD = 100 - gameData.yardLine
+    gameData.lineToGain = gameData.yardLine + 10;
+    gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
+    $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
+}
 
 $chooseOffensivePlay1.click(function () {
     computerDefense ();
@@ -349,6 +743,9 @@ $chooseOffensivePlay1.click(function () {
         }
         else {
             incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].longThrowAccuracy) {
@@ -386,7 +783,10 @@ $chooseOffensivePlay1.click(function () {
         }
     }
     else {
-        incompleteThrow ()
+        incompleteThrow ();
+        if (gameData.down > 3) {
+            turnoverOnDowns ();
+        }
     }
 })
 
@@ -432,6 +832,9 @@ $chooseOffensivePlay2.click(function () {
         }
         else {
             incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].mediumThrowAccuracy) {
@@ -470,6 +873,9 @@ $chooseOffensivePlay2.click(function () {
     }
     else {
         incompleteThrow ();
+        if (gameData.down > 3) {
+            turnoverOnDowns ();
+        }
     }
 })
 
@@ -489,9 +895,12 @@ $chooseOffensivePlay3.click(function () {
                 }
                 else {
                     completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }      
                 }
             }
-            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
+            else if(randomNumForYards > .8 && randomNumForYards <= .9) {
                 yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
                 gameData.yardLine += yardageGained;
                 if (gameData.yardLine >= 100) {
@@ -499,6 +908,9 @@ $chooseOffensivePlay3.click(function () {
                 }
                 else {
                     completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
                 }
             }
             else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
@@ -509,11 +921,17 @@ $chooseOffensivePlay3.click(function () {
                 }
                 else {
                     completedThrow ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
                 }
             }
         }
         else {
             incompleteThrow ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
         }
     }
     else if (randomNumForSuccess < team1.quarterback[0].shortThrowAccuracy) {
@@ -527,6 +945,9 @@ $chooseOffensivePlay3.click(function () {
             }
             else {
                 completedThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
@@ -537,6 +958,9 @@ $chooseOffensivePlay3.click(function () {
             }
             else {
                 completedThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
@@ -547,11 +971,17 @@ $chooseOffensivePlay3.click(function () {
             }
             else {
                 completedThrow ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
     }
     else {
         incompleteThrow ();
+        if (gameData.down > 3) {
+            turnoverOnDowns ();
+        }
     }
     if (gameData.yardsToFirstDown <= 0) {
         firstDown ();
@@ -575,6 +1005,9 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
                 }
             }
             else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
@@ -585,6 +1018,9 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
+                    }
                 }
             }
             else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
@@ -595,13 +1031,19 @@ $chooseOffensivePlay4.click(function () {
                 }
                 else {
                     successfulRun ();
+                    if (gameData.down > 3) {
+                        turnoverOnDowns ();
                 }
             }
         }
         else {
             unsuccessfulRun ();
+            if (gameData.down > 3) {
+                turnoverOnDowns ();
+            }
         }
     }
+}
     else if (randomNumForSuccess < team1.runningback[0].runAbility) {
         console.log('Run for positive yards.');
         randomNumForYards = (Math.random() * (1.001 - 0) + 0);
@@ -613,6 +1055,9 @@ $chooseOffensivePlay4.click(function () {
             }
             else {
                 successfulRun ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
         else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
@@ -623,6 +1068,9 @@ $chooseOffensivePlay4.click(function () {
             }
             else {
                 successfulRun ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
         else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
@@ -633,350 +1081,51 @@ $chooseOffensivePlay4.click(function () {
             }
             else {
                 successfulRun ();
+                if (gameData.down > 3) {
+                    turnoverOnDowns ();
+                }
             }
         }
     }
     else {
         unsuccessfulRun ();
+        if (gameData.down > 3) {
+            turnoverOnDowns ();
+        }
     }
     if (gameData.yardsToFirstDown <= 0) {
         firstDown ();
     }
-})
+});
+
+
 
 
 $chooseDefensivePlay1.click(function () {
-    computerOffense ();
+    userDefensivePlay === 0;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
-    console.log(randomNumForSuccess)
-    if (computerRandomNum === 0) {
-        if (randomNumForSuccess < team2.quarterback[0].longThrowAccuracy / 2) {
-            console.log('Completed throw.');
-            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-            if (randomNumForYards <= 0.8) {
-                yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedFirstDownThrow ()
-                }
-            }
-            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-                yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedFirstDownThrow ()
-                }
-            }
-            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-                yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass();
-                }
-                else {
-                    completedFirstDownThrow ()
-                }
-            }
-        }
-        else {
-            incompleteThrow ();
-        }
-    }
-    else if (randomNumForSuccess < team2.quarterback[0].longThrowAccuracy) {
-        console.log('Completed throw.');
-        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-        if (randomNumForYards <= 0.8) {
-            yardageGained = Math.floor(Math.random() * (40 - 30 + 1) + 30);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ()
-            }
-        }
-        else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-            yardageGained = Math.floor(Math.random() * (50 - 40 + 1) + 40);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ()
-            }
-        }
-        else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-            yardageGained = Math.floor(Math.random() * (80 - 50 + 1) + 50);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ()
-            }
-        }
-    }
-    else {
-        incompleteThrow ()
-    }
-})
-
+    console.log(randomNumForSuccess);
+    computerOffense ();
+});
 
 $chooseDefensivePlay2.click(function () {
-    computerDefense ();
+    userDefensivePlay === 1;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
-    console.log(randomNumForSuccess)
-    if (computerRandomNum === 1) {
-        if (randomNumForSuccess < team2.quarterback[0].mediumThrowAccuracy / 2) {
-            console.log('Completed throw.');
-            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-            if (randomNumForYards <= 0.8) {
-                yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedFirstDownThrow ();
-                }
-            }
-            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-                yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedFirstDownThrow ();
-                }
-            }
-            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-                yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedFirstDownThrow ();
-                }
-            }
-        }
-        else {
-            incompleteThrow ();
-        }
-    }
-    else if (randomNumForSuccess < team2.quarterback[0].mediumThrowAccuracy) {
-        console.log('Completed throw.');
-        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-        if (randomNumForYards <= 0.8) {
-            yardageGained = Math.floor(Math.random() * (18 - 10 + 1) + 10);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ();
-            }
-        }
-        else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-            yardageGained = Math.floor(Math.random() * (25 - 18 + 1) + 18);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ();
-            }
-        }
-        else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-            yardageGained = Math.floor(Math.random() * (30 - 25 + 1) + 25);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedFirstDownThrow ();
-            }
-        }
-    }
-    else {
-        incompleteThrow ();
-    }
-})
+    console.log(randomNumForSuccess);
+    computerOffense ();
+});
 
 $chooseDefensivePlay3.click(function () {
-    computerDefense ();
+    userDefensivePlay === 2;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
-    console.log(randomNumForSuccess)
-    if (computerRandomNum === 2) {
-        if (randomNumForSuccess < team2.quarterback[0].shortThrowAccuracy / 2) {
-            console.log('Completed throw.');
-            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-            if (randomNumForYards <= 0.8) {
-                yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedThrow ();
-                }
-            }
-            else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-                yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedThrow ();
-                }
-            }
-            else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-                yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownPass ();
-                }
-                else {
-                    completedThrow ();
-                }
-            }
-        }
-        else {
-            incompleteThrow ();
-        }
-    }
-    else if (randomNumForSuccess < team2.quarterback[0].shortThrowAccuracy) {
-        console.log('Completed throw.');
-        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-        if (randomNumForYards <= 0.8) {
-            yardageGained = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedThrow ();
-            }
-        }
-        else if (randomNumForYards > .8 && randomNumForYards <= .9) {
-            yardageGained = Math.floor(Math.random() * (6 - 3 + 1) + 3);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedThrow ();
-            }
-        }
-        else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
-            yardageGained = Math.floor(Math.random() * (9 - 6 + 1) + 6);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownPass ();
-            }
-            else {
-                completedThrow ();
-            }
-        }
-    }
-    else {
-        incompleteThrow ();
-    }
-    if (gameData.yardsToFirstDown <= 0) {
-        firstDown ();
-    }
-})
+    console.log(randomNumForSuccess);
+    computerOffense ();
+});
 
 
 $chooseDefensivePlay4.click(function () {
-    computerDefense ();
+    userDefensivePlay === 3;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
-    console.log(randomNumForSuccess)
-    if (computerRandomNum === 3) {
-        if (randomNumForSuccess < team2.runningback[0].runAbility / 2) {
-            console.log('Run for positive yards.');
-            randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-            if (randomNumForYards <= 0.75) {
-                yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownRun ();
-                }
-                else {
-                    successfulRun ();
-                }
-            }
-            else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
-                yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownRun ();
-                }
-                else {
-                    successfulRun ();
-                }
-            }
-            else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
-                yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
-                gameData.yardLine += yardageGained;
-                if (gameData.yardLine >= 100) {
-                    touchdownRun ();
-                }
-                else {
-                    successfulRun ();
-                }
-            }
-        }
-        else {
-            unsuccessfulRun ();
-        }
-    }
-    else if (randomNumForSuccess < team2.runningback[0].runAbility) {
-        console.log('Run for positive yards.');
-        randomNumForYards = (Math.random() * (1.001 - 0) + 0);
-        if (randomNumForYards <= 0.75) {
-            yardageGained = Math.floor(Math.random() * (4 - 1 + 1) + 1);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownRun ();
-            }
-            else {
-                successfulRun ();
-            }
-        }
-        else if (randomNumForYards > 0.75 && randomNumForYards <= 0.90) {
-            yardageGained = Math.floor(Math.random() * (9 - 4 + 1) + 4);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownRun ();
-            }
-            else {
-                successfulRun ();
-            }
-        }
-        else if (randomNumForYards > .9 && randomNumForYards <= 1 ) {
-            yardageGained = Math.floor(Math.random() * (80 - 10 + 1) + 10);
-            gameData.yardLine += yardageGained;
-            if (gameData.yardLine >= 100) {
-                touchdownRun ();
-            }
-            else {
-                successfulRun ();
-            }
-        }
-    }
-    else {
-        unsuccessfulRun ();
-    }
-    if (gameData.yardsToFirstDown <= 0) {
-        firstDown ();
-    }
-})
+    console.log(randomNumForSuccess);
+    computerOffense ();
+});
