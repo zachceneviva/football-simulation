@@ -115,10 +115,11 @@ header h1 {
 }
 
 .game-field {
-    background-color: greenyellow;
     width: 75%;
     height: 500px;
     background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/accd3f04-700a-440b-8a16-b6601f358893/d9limq8-319f128c-97cd-4f3a-9c97-dc832d279ec1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FjY2QzZjA0LTcwMGEtNDQwYi04YTE2LWI2NjAxZjM1ODg5M1wvZDlsaW1xOC0zMTlmMTI4Yy05N2NkLTRmM2EtOWM5Ny1kYzgzMmQyNzllYzEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.z4Qy8MeSTJIZRwz4lp649V_kv4If3zPY-lDO3E9I_ME');
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
 }
 
@@ -235,4 +236,17 @@ footer p {
     width: 125px;
     margin-right: 10px;
     background-color: white;
+}
+
+.game-ball {
+    margin-top: 225px;
+    height: 50px;
+    width:50px;
+    margin-left: auto;
+    margin-right: 225px;
+}
+
+#football {
+    height: 50px;
+    background-color: transparent;
 }

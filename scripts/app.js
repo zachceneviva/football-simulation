@@ -95,17 +95,37 @@ const gameData = {
     displayDown: ['1st', '2nd', '3rd', '4th'],
     quarter: 0,
     displayQuarter: ['1Q', '2Q', '3Q', '4Q'],
-    time: 120000,
+    time: 15,
+    intervalTime: null,
+    decrement: () => {
+        gameData.time--;
+        if (gameData.time === 0) {
+            clearInterval(gameData.intervalTime);
+            gameData.quarter++;
+            gameData.time = 15;
+            gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
+        }
+        if (gameData.quarter > 3) {
+            clearInterval(gameData.intervalTime)
+            gameData.quarter = 3
+            gameData.time = 0
+        }
+        $quarterTime.html(`${gameData.displayQuarter[gameData.quarter]}, ${gameData.time}`)
+    },
     team1Score: 0,
     team2Score: 0,
     possession: 0,
 }
 
-// setTimeout(function () {
-//     gameData.quarter += 1;
-//     $quarterTime.html(`${gameData.displayQuarter[gameData.quarter]}`)
-// }, 120000)
 
+function changeQ () {
+    gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
+}
+// setInterval(function () {
+//     gameData.time --
+//     $quarterTime.html(`${gameData.displayQuarter[quarter]}, ${gameData.time}`)
+// }, 10000)
+changeQ();
 
 const $quarterTime = $('#quarter-time')
 const $downYardage = $('#down-yardage')
@@ -140,13 +160,14 @@ const $team2Player5 = $('#team2-player5')
 const $team2Player6 = $('#team2-player6')
 const $team2Player7 = $('#team2-player7')
 const $team2Player8 = $('#team2-player8')
-const $football = $('#football')
+const $football = $('.game-ball')
 
 let randomNumForSuccess= 0
 let randomNumForYards = 0
 let yardageGained = 0
 let computerRandomNum = 0
 let userDefensivePlay = 0
+let footballLocation = 0
 
 
 function computerDefense () {
@@ -187,9 +208,13 @@ function firstDown () {
 function completedFirstDownThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-left', footballLocation + 'px');
     }
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.lineToGain = gameData.yardLine + 10;
@@ -201,9 +226,13 @@ function completedFirstDownThrow () {
 function completedThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-left', footballLocation + 'px');
     }
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
@@ -214,9 +243,13 @@ function completedThrow () {
 function successfulRun () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran for a ${yardageGained} yard gain.`);
+        footballLocation = gameData.yardLine * 9.5;
+        $football.css('margin-left', footballLocation + 'px');
     }
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
@@ -244,9 +277,17 @@ function incompleteThrow () {
 function touchdownPass () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+        footballLocation = 105 * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
+        $football.css('margin-right', 'auto');
+        $football.css('margin-left', '225px');
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+        footballLocation = 105 * 9.5;
+        $football.css('margin-left', footballLocation + 'px');
+        $football.css('margin-left', 'auto')
+        $football.css('margin-right', '225px')
     }
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
@@ -270,9 +311,19 @@ function touchdownPass () {
 function touchdownRun () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+        footballLocation = 105 * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
+        footballLocation = 105 * 9.5;
+        $football.css('margin-right', footballLocation + 'px');
+        $football.css('margin-right', 'auto')
+        $football.css('margin-left', '225px')
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
+        footballLocation = 105 * 9.5;
+        $football.css('margin-left', footballLocation + 'px');
+        $football.css('margin-left', 'auto')
+        $football.css('margin-right', '235px')
     }
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
@@ -688,7 +739,7 @@ $chooseOffensivePlay1.click(function () {
                     touchdownPass ();
                 }
                 else {
-                    completedFirstDownThrow ()
+                    completedFirstDownThrow ();
                 }
             }
             else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
@@ -698,7 +749,7 @@ $chooseOffensivePlay1.click(function () {
                     touchdownPass();
                 }
                 else {
-                    completedFirstDownThrow ()
+                    completedFirstDownThrow ();
                 }
             }
         }
@@ -717,7 +768,7 @@ $chooseOffensivePlay1.click(function () {
                 touchdownPass ();
             }
             else {
-                completedFirstDownThrow ()
+                completedFirstDownThrow ();
             }
         }
         else if (randomNumForYards > .8 && randomNumForYards <= .9) {
@@ -727,7 +778,7 @@ $chooseOffensivePlay1.click(function () {
                 touchdownPass ();
             }
             else {
-                completedFirstDownThrow ()
+                completedFirstDownThrow ();
             }
         }
         else if (randomNumForYards > 0.9 && randomNumForYards <= 1) {
@@ -737,7 +788,7 @@ $chooseOffensivePlay1.click(function () {
                 touchdownPass ();
             }
             else {
-                completedFirstDownThrow ()
+                completedFirstDownThrow ();
             }
         }
     }
