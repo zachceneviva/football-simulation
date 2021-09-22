@@ -1,4 +1,6 @@
+// Objects with player data from each team
 const team1 = {
+    name: 'Bucs',
     quarterback: [
         {
         name: 'Tom Brady',
@@ -43,6 +45,7 @@ const team1 = {
 }
 
 const team2 = {
+    name: 'Chiefs',
     quarterback: [
         {
         name: 'Patrick Mahomes',
@@ -86,6 +89,8 @@ const team2 = {
     }
 }
 
+
+// Object with data from the game
 const gameData = {
     yardLine: 20,
     yardsToTD: 80,
@@ -117,16 +122,31 @@ const gameData = {
     possession: 0,
 }
 
-
 function changeQ () {
     gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
 }
-// setInterval(function () {
-//     gameData.time --
-//     $quarterTime.html(`${gameData.displayQuarter[quarter]}, ${gameData.time}`)
-// }, 10000)
-changeQ();
 
+$(window).ready(function () {
+    changeQ();
+    $team1Name.html(`${team1.name}`)
+    $team1Player1.html(`${team1.quarterback[0].name}`)
+    $team1Player2.html(`${team1.runningback[0].name}`)
+    $team1Player3.html(`${team1.widereceivers[0].name}`)
+    $team1Player4.html(`${team1.widereceivers[1].name}`)
+    $team1Player5.html(`${team1.widereceivers[2].name}`)
+    $team1Player6.html(`${team1.tightends[0].name}`)
+    $team2Name.html(`${team2.name}`)
+    $team2Player1.html(`${team2.quarterback[0].name}`)
+    $team2Player2.html(`${team2.runningback[0].name}`)
+    $team2Player3.html(`${team2.widereceivers[0].name}`)
+    $team2Player4.html(`${team2.widereceivers[1].name}`)
+    $team2Player5.html(`${team2.widereceivers[2].name}`)
+    $team2Player6.html(`${team2.tightends[0].name}`)
+    $team1.html(`${team1.name}`)
+    $team2.html(`${team2.name}`)
+})
+
+// jQuery variables used to store DOM elements to be used for DOM manipulation
 const $quarterTime = $('#quarter-time')
 const $downYardage = $('#down-yardage')
 const $team1Score = $('#team1-score')
@@ -149,8 +169,6 @@ const $team1Player3 = $('#team1-player3')
 const $team1Player4 = $('#team1-player4')
 const $team1Player5 = $('#team1-player5')
 const $team1Player6 = $('#team1-player6')
-const $team1Player7 = $('#team1-player7')
-const $team1Player8 = $('#team1-player8')
 const $team2Name = $('#team2-name')
 const $team2Player1 = $('#team2-player1')
 const $team2Player2 = $('#team2-player2')
@@ -158,10 +176,9 @@ const $team2Player3 = $('#team2-player3')
 const $team2Player4 = $('#team2-player4')
 const $team2Player5 = $('#team2-player5')
 const $team2Player6 = $('#team2-player6')
-const $team2Player7 = $('#team2-player7')
-const $team2Player8 = $('#team2-player8')
 const $football = $('.game-ball')
 
+// Global variables to be used in multiple functions
 let randomNumForSuccess= 0
 let randomNumForYards = 0
 let yardageGained = 0
@@ -170,6 +187,7 @@ let userDefensivePlay = 0
 let footballLocation = 0
 
 
+// Global functions that are executed at various points in the application
 function computerDefense () {
     computerRandomNum = Math.floor(Math.random () * (4));
     if (computerRandomNum === 0) {
@@ -713,7 +731,7 @@ function computerOffense () {
 
 
 
-
+// Button functionality for when the user is playing offense against the computer generated defense
 $chooseOffensivePlay1.click(function () {
     computerDefense ();
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
@@ -1072,7 +1090,7 @@ $chooseOffensivePlay4.click(function () {
 
 
 
-
+// Button funcitonality for when the user is playing defense against the computer generated offense.
 $chooseDefensivePlay1.click(function () {
     userDefensivePlay === 0;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
