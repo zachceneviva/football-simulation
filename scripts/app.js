@@ -179,6 +179,7 @@ $(window).ready(function () {
     $team2Name.html(`${team2.name}`)
     $team1.html(`${team1.name}`)
     $team2.html(`${team2.name}`)
+    $football.css('margin-right', '240px')
 })
 
 // jQuery variables used to store DOM elements to be used for DOM manipulation
@@ -271,8 +272,8 @@ function firstDown () {
 function completedFirstDownThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-right', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-right', footballLocation + 240 + 'px');
         gameData.team1FD += 1;
         $team1FD.html(`${gameData.team1FD}`);
         gameData.team1ThrowingYards += yardageGained;
@@ -280,8 +281,8 @@ function completedFirstDownThrow () {
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-left', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-left', footballLocation + 240 + 'px');
         gameData.team2FD += 1;
         $team2FD.html(`${gameData.team2FD}`);
         gameData.team2ThrowingYards += yardageGained;
@@ -297,15 +298,15 @@ function completedFirstDownThrow () {
 function completedThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-right', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-right', footballLocation + 240 + 'px');
         gameData.team1ThrowingYards += yardageGained;
         $team1ThrowingYards.html (`${gameData.team1ThrowingYards}`);
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-left', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-left', footballLocation + 240 + 'px');
         gameData.team2ThrowingYards += yardageGained;
         $team2ThrowingYards.html (`${gameData.team2ThrowingYards}`);
     }
@@ -318,15 +319,15 @@ function completedThrow () {
 function successfulRun () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-right', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-right', footballLocation + 240 + 'px');
         gameData.team1RushingYards += yardageGained;
         $team1RushingYards.html (`${gameData.team1RushingYards}`);
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran for a ${yardageGained} yard gain.`);
-        footballLocation = gameData.yardLine * 9.5;
-        $football.css('margin-left', footballLocation + 'px');
+        footballLocation = gameData.yardLine * 7;
+        $football.css('margin-left', footballLocation + 240 + 'px');
         gameData.team2RushingYards += yardageGained;
         $team2RushingYards.html (`${gameData.team2RushingYards}`);
     }
@@ -358,19 +359,15 @@ function touchdownPass () {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`);
         gameData.team1ThrowingYards += gameData.yardsToTD;
         $team1ThrowingYards.html (`${gameData.team1ThrowingYards}`);
-        footballLocation = 105 * 9.5;
-        $football.css('margin-right', footballLocation + 'px');
         $football.css('margin-right', 'auto');
-        $football.css('margin-left', '225px');
+        $football.css('margin-left', '240px');
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.quarterback[0].name} threw it to ${team2.widereceivers[Math.floor(Math.random() * (2 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`);
         gameData.team2ThrowingYards += gameData.yardsToTD;
         $team2ThrowingYards.html (`${gameData.team2ThrowingYards}`);
-        footballLocation = 105 * 9.5;
-        $football.css('margin-left', footballLocation + 'px');
         $football.css('margin-left', 'auto');
-        $football.css('margin-right', '225px');
+        $football.css('margin-right', '240px');
     }
     blink ();
     gameData.yardLine = 20;
@@ -394,20 +391,16 @@ function touchdownPass () {
 
 function touchdownRun () {
     if (gameData.possession === 0) {
-        $playScript.html(`${team1.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-        footballLocation = 105 * 9.5;
-        $football.css('margin-right', footballLocation + 'px');
+        $playScript.html(`${team1.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`);
         $football.css('margin-right', 'auto');
-        $football.css('margin-left', '225px');
+        $football.css('margin-left', '240px');
         gameData.team1RushingYards += gameData.yardsToTD;
         $team1RushingYards.html (`${gameData.team1RushingYards}`);
     }
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`)
-        footballLocation = 105 * 9.5;
-        $football.css('margin-left', footballLocation + 'px');
         $football.css('margin-left', 'auto');
-        $football.css('margin-right', '235px');
+        $football.css('margin-right', '240px');
         gameData.team2RushingYards += gameData.yardsToTD;
         $team2RushingYards.html (`${gameData.team2RushingYards}`);
     }
