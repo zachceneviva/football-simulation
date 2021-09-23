@@ -103,6 +103,7 @@ header h1 {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-offensive-play2 {
@@ -110,6 +111,7 @@ header h1 {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-offensive-play3 {
@@ -117,6 +119,7 @@ header h1 {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-offensive-play4 {
@@ -125,6 +128,7 @@ header h1 {
     margin-right: 10px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 .game-visuals {
@@ -238,6 +242,7 @@ footer p {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-defensive-play2 {
@@ -245,6 +250,7 @@ footer p {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-defensive-play3 {
@@ -252,6 +258,7 @@ footer p {
     width: 125px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-defensive-play4 {
@@ -260,6 +267,7 @@ footer p {
     margin-right: 10px;
     background-color: white;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 .game-ball {
@@ -285,6 +293,7 @@ footer p {
     font-size: 20px;
     border-radius: 5px;
     font-family: 'Graduate';
+    transition: transform 0.25s ease;
 }
 
 #choose-defensive-play1:hover {
