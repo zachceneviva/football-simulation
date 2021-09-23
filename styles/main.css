@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Graduate', cursive;
+}
+
+
 header {
     background-color:#013369;
     height: 100px;
@@ -63,7 +68,8 @@ header h1 {
     background-color: white;
     width: 75%;
     margin-left: 12.5%;
-    height: 40px;
+    height: 45px;
+    font-size: 18px;
 }
 
 .select-offensive-play {
@@ -85,18 +91,21 @@ header h1 {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-offensive-play2 {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-offensive-play3 {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-offensive-play4 {
@@ -104,6 +113,7 @@ header h1 {
     width: 125px;
     margin-right: 10px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 .game-visuals {
@@ -136,24 +146,39 @@ header h1 {
 
 .team1 h4 {
     font-size: 30px;
-    background-color: white;
     margin: 5px;
-    margin-bottom: 10px;
 }
 
-.team1-players {
+.team1-info {
     display: flex;
     flex-direction: column;
     align-items:flex-start;
     justify-content: space-between;
-    height: 80%;
+    height: 97%;
+    margin: 5px;
+    background-color: white;
+    padding-bottom: 20px;
+    border-radius: 5px;
 }
 
 .team1 p {
-    font-size: 17.5px;
-    background-color: white;
+    font-size: 15px;
     margin-left: 5px;
     width: fit-content;
+}
+
+#team1-throwing-yards {
+    text-align: left;
+    font-size: 13.5px;
+}
+
+#team1-total-running-plays {
+    padding-bottom: 10px;
+}
+
+#team1-total-throwing-plays {
+    text-align: left;
+    font-size: 14px;
 }
 
 .team2 {
@@ -168,24 +193,40 @@ header h1 {
 
 .team2 h4 {
     font-size: 30px;
-    background-color: white;
     margin: 5px;
-    margin-bottom: 10px;
 }
 
-.team2-players {
+.team2-info {
     display: flex;
     flex-direction: column;
-    align-items:flex-end;
+    align-items:flex-start;
     justify-content: space-between;
-    height: 80%;
+    height: 97%;
+    margin: 5px;
+    background-color: white;
+    padding-bottom: 20px;
+    border-radius: 5px;
 }
 
 .team2 p {
-    font-size: 17.5px;
+    font-size: 15px;
     background-color: white;
-    margin-right: 5px;
+    margin-left: 5px;
     width: fit-content;
+}
+
+#team2-throwing-yards {
+    text-align: left;
+    font-size: 13.5px;
+}
+
+#team2-total-running-plays {
+    padding-bottom: 10px;
+}
+
+#team2-total-throwing-plays {
+    text-align: left;
+    font-size: 14px;
 }
 
 footer {
@@ -218,18 +259,21 @@ footer p {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-defensive-play2 {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-defensive-play3 {
     height: 40px;
     width: 125px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 #choose-defensive-play4 {
@@ -237,6 +281,7 @@ footer p {
     width: 125px;
     margin-right: 10px;
     background-color: white;
+    font-family: 'Graduate';
 }
 
 .game-ball {
