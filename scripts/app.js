@@ -141,6 +141,14 @@ function changeQ () {
     gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
 }
 
+
+function blink () {
+    $('body').toggleClass('blink');
+    setTimeout( function () {
+        $('body').toggleClass('blink');
+    }, 4000)
+}
+
 function gameOver () {
     $chooseOffensivePlay1.prop('disabled', true);
     $chooseOffensivePlay2.prop('disabled', true);
@@ -361,9 +369,10 @@ function touchdownPass () {
         $team2ThrowingYards.html (`${gameData.team2ThrowingYards}`);
         footballLocation = 105 * 9.5;
         $football.css('margin-left', footballLocation + 'px');
-        $football.css('margin-left', 'auto')
-        $football.css('margin-right', '225px')
+        $football.css('margin-left', 'auto');
+        $football.css('margin-right', '225px');
     }
+    blink ();
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.lineToGain = gameData.yardLine + 10;
@@ -402,6 +411,7 @@ function touchdownRun () {
         gameData.team2RushingYards += gameData.yardsToTD;
         $team2RushingYards.html (`${gameData.team2RushingYards}`);
     }
+    blink();
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.lineToGain = gameData.yardLine + 10;

@@ -9,6 +9,17 @@ body {
 }
 
 
+.blink {
+    background-color: white;
+    animation: blink 0.5s linear 4;
+}
+
+@keyframes blink {
+    0% {opacity: 0;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
 header {
     background-color:#013369;
     height: 100px;
@@ -274,4 +285,49 @@ footer p {
     font-size: 20px;
     border-radius: 5px;
     font-family: 'Graduate';
+}
+
+#choose-defensive-play1:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-defensive-play2:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-defensive-play3:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-defensive-play4:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-offensive-play1:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-offensive-play2:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-offensive-play3:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#choose-offensive-play4:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.play-again:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
