@@ -113,7 +113,8 @@ const gameData = {
         if (gameData.quarter > 3) {
             clearInterval(gameData.intervalTime)
             gameData.quarter = 3
-            gameData.time = 0
+            gameData.time = 0;
+            gameOver ();
         }
         $quarterTime.html(`${gameData.displayQuarter[gameData.quarter]}, ${gameData.time}`)
     },
@@ -124,6 +125,34 @@ const gameData = {
 
 function changeQ () {
     gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
+}
+
+function gameOver () {
+    $chooseOffensivePlay1.prop('disabled', true);
+    $chooseOffensivePlay2.prop('disabled', true);
+    $chooseOffensivePlay3.prop('disabled', true);
+    $chooseOffensivePlay4.prop('disabled', true);
+    $chooseDefensivePlay1.prop('disabled', true);
+    $chooseDefensivePlay2.prop('disabled', true);
+    $chooseDefensivePlay3.prop('disabled', true);
+    $chooseDefensivePlay4.prop('disabled', true);
+    if (gameData.team1Score > gameData.team2Score) {
+        $playScript.html(`GAMEOVER! 
+
+        The ${team1.name} defeat the ${team2.name} ${gameData.team1Score} - ${gameData.team2Score}.`)
+    }
+    else if (gameData.team1 < gameData.team2Score) {
+        $playScript.html(`GAMEOVER! 
+
+        The ${team2.name} defeat the ${team1.name} ${gameData.team2Score} - ${gameData.team1Score}.`)
+    }
+    else {
+        $playScript.html(`The game ended in a ${gameData.team1Score} - ${gameData.team2Score} tie.`)
+    }
+    $('.game-data').append(`<button class="play-again">Play Again</button>`)
+    $('.play-again').click (function () {
+        location.reload();
+    })
 }
 
 $(window).ready(function () {

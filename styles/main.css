@@ -34,6 +34,7 @@ header h1 {
     width: 40%;
     margin-left: 30%;
     height: 40px;
+    margin-top: 5px;
 }
 
 .score {
@@ -249,4 +250,15 @@ footer p {
 #football {
     height: 50px;
     background-color: transparent;
+}
+
+.play-again {
+    width: 150px;
+    margin: 0 auto;
+    margin-top: 5px;
+    height: 40px;
+    background-color: white;
+    margin-bottom: 5px;
+    font-size: 20px;
+    border-radius: 5px;
 }
