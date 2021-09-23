@@ -27,7 +27,7 @@ header h1 {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    background-color: #D50A0A;
+    background-color: rgba(213, 10, 10, 0.9);
     width: 50%;
     height: 200px;
     border-radius: 10px;
@@ -119,6 +119,7 @@ header h1 {
 .game-visuals {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     margin-top: 25px;
@@ -127,11 +128,11 @@ header h1 {
 
 .game-field {
     width: 75%;
-    height: 500px;
+    height:550px;
     background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/accd3f04-700a-440b-8a16-b6601f358893/d9limq8-319f128c-97cd-4f3a-9c97-dc832d279ec1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FjY2QzZjA0LTcwMGEtNDQwYi04YTE2LWI2NjAxZjM1ODg5M1wvZDlsaW1xOC0zMTlmMTI4Yy05N2NkLTRmM2EtOWM5Ny1kYzgzMmQyNzllYzEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.z4Qy8MeSTJIZRwz4lp649V_kv4If3zPY-lDO3E9I_ME');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: 100% auto;
 }
 
 .team1 {
@@ -159,27 +160,11 @@ header h1 {
     background-color: white;
     padding-bottom: 20px;
     border-radius: 5px;
-}
-
-.team1 p {
-    font-size: 15px;
-    margin-left: 5px;
-    width: fit-content;
-}
-
-#team1-throwing-yards {
+    font-size: 13px;
     text-align: left;
-    font-size: 13.5px;
+    padding-left: 5px;
 }
 
-#team1-total-running-plays {
-    padding-bottom: 10px;
-}
-
-#team1-total-throwing-plays {
-    text-align: left;
-    font-size: 14px;
-}
 
 .team2 {
     background-color: #D50A0A;
@@ -206,27 +191,9 @@ header h1 {
     background-color: white;
     padding-bottom: 20px;
     border-radius: 5px;
-}
-
-.team2 p {
-    font-size: 15px;
-    background-color: white;
-    margin-left: 5px;
-    width: fit-content;
-}
-
-#team2-throwing-yards {
+    font-size: 13px;
     text-align: left;
-    font-size: 13.5px;
-}
-
-#team2-total-running-plays {
-    padding-bottom: 10px;
-}
-
-#team2-total-throwing-plays {
-    text-align: left;
-    font-size: 14px;
+    padding-left: 5px;
 }
 
 footer {
@@ -285,7 +252,7 @@ footer p {
 }
 
 .game-ball {
-    margin-top: 225px;
+    margin-top: 250px;
     height: 50px;
     width:50px;
     margin-left: auto;
@@ -306,4 +273,5 @@ footer p {
     margin-bottom: 5px;
     font-size: 20px;
     border-radius: 5px;
+    font-family: 'Graduate';
 }
