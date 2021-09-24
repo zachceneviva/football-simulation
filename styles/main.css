@@ -31,6 +31,25 @@ header h1 {
     padding-top: 30px;
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.start-game {
+    margin-left: auto;
+    margin-right: 50px;
+    margin-top: 35px;
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    font-family: 'Graduate';
+    transition: transform 0.25s ease;
+}
+
 .game-data {
     margin: auto;
     margin-top: 20px;
@@ -337,6 +356,11 @@ footer p {
 }
 
 .play-again:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.start-game:hover {
     transform: scale(1.05);
     cursor: pointer;
 }

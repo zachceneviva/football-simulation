@@ -102,11 +102,11 @@ const gameData = {
             clearInterval(gameData.intervalTime);
             gameData.quarter++;
             gameData.time = 15;
-            gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
+            gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3);
         }
         if (gameData.quarter > 3) {
-            clearInterval(gameData.intervalTime)
-            gameData.quarter = 3
+            clearInterval(gameData.intervalTime);
+            gameData.quarter = 3;
             gameData.time = 0;
             gameOver ();
         }
@@ -131,50 +131,7 @@ const gameData = {
     team2RushingPlays: 0,
 }
 
-function changeQ () {
-    gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
-}
 
-
-function blink () {
-    $('body').toggleClass('blink');
-    setTimeout( function () {
-        $('body').toggleClass('blink');
-    }, 4000)
-}
-
-function gameOver () {
-    $chooseOffensivePlay1.prop('disabled', true);
-    $chooseOffensivePlay2.prop('disabled', true);
-    $chooseOffensivePlay3.prop('disabled', true);
-    $chooseOffensivePlay4.prop('disabled', true);
-    $chooseDefensivePlay1.prop('disabled', true);
-    $chooseDefensivePlay2.prop('disabled', true);
-    $chooseDefensivePlay3.prop('disabled', true);
-    $chooseDefensivePlay4.prop('disabled', true);
-    if (gameData.team1Score > gameData.team2Score) {
-        $playScript.html(`GAMEOVER! The ${team1.name} defeat the ${team2.name} ${gameData.team1Score} - ${gameData.team2Score}.`)
-    }
-    else if (gameData.team1Score < gameData.team2Score) {
-        $playScript.html(`GAMEOVER! The ${team2.name} defeat the ${team1.name} ${gameData.team2Score} - ${gameData.team1Score}.`)
-    }
-    else {
-        $playScript.html(`The game ended in a ${gameData.team1Score} - ${gameData.team2Score} tie.`)
-    }
-    $('.game-data').append(`<button class="play-again">Play Again</button>`)
-    $('.play-again').click (function () {
-        location.reload();
-    })
-}
-
-$(window).ready(function () {
-    changeQ();
-    $team1Name.html(`${team1.name}`)
-    $team2Name.html(`${team2.name}`)
-    $team1.html(`${team1.name}`)
-    $team2.html(`${team2.name}`)
-    $football.css('margin-right', '240px')
-})
 
 // jQuery variables used to store DOM elements to be used for DOM manipulation
 const $quarterTime = $('#quarter-time')
@@ -223,12 +180,20 @@ let footballLocation = 0
 
 // Imports names of the teams and the position of the football when the game first loads
 $(window).ready(function () {
-    changeQ();
-    $team1Name.html(`${team1.name}`)
-    $team2Name.html(`${team2.name}`)
-    $team1.html(`${team1.name}`)
-    $team2.html(`${team2.name}`)
-    $football.css('margin-right', '240px')
+    $team1Name.html(`${team1.name}`);
+    $team2Name.html(`${team2.name}`);
+    $team1.html(`${team1.name}`);
+    $team2.html(`${team2.name}`);
+    $football.css('margin-right', '240px');
+    $chooseOffensivePlay1.prop('disabled', true);
+    $chooseOffensivePlay2.prop('disabled', true);
+    $chooseOffensivePlay3.prop('disabled', true);
+    $chooseOffensivePlay4.prop('disabled', true);
+    $chooseDefensivePlay1.prop('disabled', true);
+    $chooseDefensivePlay2.prop('disabled', true);
+    $chooseDefensivePlay3.prop('disabled', true);
+    $chooseDefensivePlay4.prop('disabled', true);
+    $playScript.html(`${team1.name} vs ${team2.name}`);
 })
 
 // Function for the timing of each quarter
@@ -878,7 +843,22 @@ function computerOffense () {
     }
 }
 
+// EVENT LISTENTERS
 
+// Event Listener for the button to start the game
+$('.start-game').click (function (){
+    changeQ();
+    $('.start-game').prop('disabled', true);
+    $chooseOffensivePlay1.prop('disabled', false);
+    $chooseOffensivePlay2.prop('disabled', false);
+    $chooseOffensivePlay3.prop('disabled', false);
+    $chooseOffensivePlay4.prop('disabled', false);
+    $chooseDefensivePlay1.prop('disabled', false);
+    $chooseDefensivePlay2.prop('disabled', false);
+    $chooseDefensivePlay3.prop('disabled', false);
+    $chooseDefensivePlay4.prop('disabled', false);
+    $playScript.html(`Pick a play to start your drive!`)
+})
 
 // Button functionality for when the user is playing offense against the computer generated defense
 // Button1 is for a "long throw"
