@@ -1,4 +1,4 @@
-// Objects with player data from each team
+// Objects with player data for each team
 const team1 = {
     name: 'Bucs',
     quarterback: [
@@ -84,7 +84,7 @@ const team2 = {
 }
 
 
-// Object with data from the game
+// Object with data for the game
 const gameData = {
     yardLine: 20,
     yardsToTD: 80,
@@ -220,6 +220,56 @@ let footballLocation = 0
 
 
 // Global functions that are executed at various points in the application
+
+// Imports names of the teams and the position of the football when the game first loads
+$(window).ready(function () {
+    changeQ();
+    $team1Name.html(`${team1.name}`)
+    $team2Name.html(`${team2.name}`)
+    $team1.html(`${team1.name}`)
+    $team2.html(`${team2.name}`)
+    $football.css('margin-right', '240px')
+})
+
+// Function for the timing of each quarter
+function changeQ () {
+    gameData.intervalTime = setInterval(gameData.decrement, 1000 * 3)
+}
+
+// Function that executes a blink animation. This is called whenever a touchdown is scored.
+function blink () {
+    $('body').toggleClass('blink');
+    setTimeout( function () {
+        $('body').toggleClass('blink');
+    }, 4000)
+}
+
+// Function that runs at the end of the game when the timer reaches 0 in the 4th quarter
+function gameOver () {
+    $chooseOffensivePlay1.prop('disabled', true);
+    $chooseOffensivePlay2.prop('disabled', true);
+    $chooseOffensivePlay3.prop('disabled', true);
+    $chooseOffensivePlay4.prop('disabled', true);
+    $chooseDefensivePlay1.prop('disabled', true);
+    $chooseDefensivePlay2.prop('disabled', true);
+    $chooseDefensivePlay3.prop('disabled', true);
+    $chooseDefensivePlay4.prop('disabled', true);
+    if (gameData.team1Score > gameData.team2Score) {
+        $playScript.html(`GAMEOVER! The ${team1.name} defeat the ${team2.name} ${gameData.team1Score} - ${gameData.team2Score}.`)
+    }
+    else if (gameData.team1Score < gameData.team2Score) {
+        $playScript.html(`GAMEOVER! The ${team2.name} defeat the ${team1.name} ${gameData.team2Score} - ${gameData.team1Score}.`)
+    }
+    else {
+        $playScript.html(`The game ended in a ${gameData.team1Score} - ${gameData.team2Score} tie.`)
+    }
+    $('.game-data').append(`<button class="play-again">Play Again</button>`)
+    $('.play-again').click (function () {
+        location.reload();
+    })
+}
+
+// Generates a random number that is used for how the computer generates a defensive play to go against the user's offensive play selection
 function computerDefense () {
     computerRandomNum = Math.floor(Math.random () * (4));
     if (computerRandomNum === 0) {
@@ -236,7 +286,7 @@ function computerDefense () {
     }
 }
 
-
+// Toggles the visibility of the proper set of buttons for playing offense or defense
 function changePossession () {
     if (gameData.possession === 0) {
         $('.select-offensive-play').css('visibility', 'visible');
@@ -246,8 +296,10 @@ function changePossession () {
         $('.select-offensive-play').css('visibility', 'hidden');
         $('.select-defensive-play').css('visibility', 'visible');
     }
+    console.log(`Possession change`)
 }
 
+// Function for setting the necessary data when a first down occurs
 function firstDown () {
     if (gameData.possession === 0) {
         gameData.team1FD += 1;
@@ -257,12 +309,14 @@ function firstDown () {
         gameData.team2FD += 1;
         $team2FD.html(`${gameData.team2FD}`)
     }
+    console.log(`First Down`)
     gameData.down = 0;
     gameData.lineToGain = gameData.yardLine + 10;
     gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
 }
 
+// First down function for when the throw is an automatic first down
 function completedFirstDownThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (3 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -289,6 +343,7 @@ function completedFirstDownThrow () {
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
 }
 
+// Function for when a throw is completed that is not a first down automatically
 function completedThrow () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (3 - 0 +1) + 0)].name} for a ${yardageGained} yard gain.`);
@@ -304,12 +359,14 @@ function completedThrow () {
         gameData.team2ThrowingYards += yardageGained;
         $team2ThrowingYards.html (`${gameData.team2ThrowingYards}`);
     }
+    console.log(`Completed throw`)
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
     gameData.down += 1;
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
 }
 
+// Function for when the ball is run for positive yards
 function successfulRun () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran for a ${yardageGained} yard gain.`);
@@ -325,12 +382,14 @@ function successfulRun () {
         gameData.team2RushingYards += yardageGained;
         $team2RushingYards.html (`${gameData.team2RushingYards}`);
     }
+    console.log(`Successful throw`)
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.yardsToFirstDown = gameData.lineToGain - gameData.yardLine;
     gameData.down += 1;
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
 }
 
+// Function for when a run play is not successful
 function unsuccessfulRun () {
     gameData.down += 1
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`);
@@ -340,14 +399,19 @@ function unsuccessfulRun () {
     else if (gameData.possession === 1) {
         $playScript.html(`${team2.runningback[0].name} ran for no gain.`);
     }
+    console.log(`Unsuccessful run`)
 }
 
+// Function for an incomplete pass
 function incompleteThrow () {
+    console.log(`Incomplete pass`)
     $playScript.html(`The pass was incomplete.`);
     gameData.down += 1
     $downYardage.html(`${gameData.displayDown[gameData.down]} and ${gameData.yardsToFirstDown}`)
 }
 
+
+// Function for a touchdown pass
 function touchdownPass () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.quarterback[0].name} threw it to ${team1.widereceivers[Math.floor(Math.random() * (3 - 0 +1) + 0)].name} for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`);
@@ -364,6 +428,7 @@ function touchdownPass () {
         $football.css('margin-right', '240px');
     }
     blink ();
+    console.log(`Touchdown Pass!`)
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.lineToGain = gameData.yardLine + 10;
@@ -383,6 +448,7 @@ function touchdownPass () {
     changePossession ();
 }
 
+// Function for a touchdown run
 function touchdownRun () {
     if (gameData.possession === 0) {
         $playScript.html(`${team1.runningback[0].name} ran it for a ${gameData.yardsToTD} yard TOUCHDOWN!!!!!!!`);
@@ -399,6 +465,7 @@ function touchdownRun () {
         $team2RushingYards.html (`${gameData.team2RushingYards}`);
     }
     blink();
+    console.log(`Touchdown run!`)
     gameData.yardLine = 20;
     gameData.yardsToTD = 100 - gameData.yardLine;
     gameData.lineToGain = gameData.yardLine + 10;
@@ -418,6 +485,7 @@ function touchdownRun () {
     changePossession ();
 }
 
+// Funciton for when the offense turns the ball over on 4th down
 function turnoverOnDowns () {
     if (gameData.down > 3) {
         gameData.down = 0;
@@ -445,7 +513,7 @@ function turnoverOnDowns () {
     }
 }
 
-
+// Function for computer generated offensive play
 function computerOffense () {
     computerRandomNum = Math.floor(Math.random () * (4));
     if (computerRandomNum === 0) {
@@ -813,6 +881,10 @@ function computerOffense () {
 
 
 // Button functionality for when the user is playing offense against the computer generated defense
+// Button1 is for a "long throw"
+// Button2 is for a "medium throw"
+// Button3 is for a "short throw"
+// Button4 is for a "run"
 $chooseOffensivePlay1.click(function () {
     computerDefense ();
     gameData.team1TotalPlays += 1;
@@ -1187,7 +1259,11 @@ $chooseOffensivePlay4.click(function () {
 
 
 
-// Button funcitonality for when the user is playing defense against the computer generated offense.
+// Button funcitonality for when the user is playing defense against the computer generated offense
+// Button1 is for defeding a"long throw"
+// Button2 is for defending a "medium throw"
+// Button3 is for defending a "short throw"
+// Button4 is for defending a "run"
 $chooseDefensivePlay1.click(function () {
     userDefensivePlay === 0;
     randomNumForSuccess = (Math.random() * (1.001 - 0) + 0);
