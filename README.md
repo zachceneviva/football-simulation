@@ -1,7 +1,11 @@
 # football-simulation
 
 ## Introduction
-Football is back! This browser game is a simulation football game of a user calling offensive and defensive plays against the computerized opponent. Each game will last about 4 minutes, with the objective of the game being to out-strategize the computer and score more touchdowns. The gamepage shows the score, quarter, down, time, yards needed for a first down, a variety of team data, and a game field visualization of each play. Good luck and have fun!
+Football is back! This browser game is a simulation football game of a user calling offensive and defensive plays against the computerized opponent. Each game will last about 4 minutes, with the objective of the game being to out-strategize the computer and score more touchdowns. The gamepage shows the score, quarter, down, time, yards needed for a first down, a variety of team data, and a game field visualization of each play. 
+
+I am a big football fan, so I wanted to find a way to incorporate a major passion of mine into a fun project. Additionally, I love data and tried to incorporate a lot of data into this game. I think data is extremely powerful and can be leveraged to make high impact decisions. This is why I tried to show some live data about each team's performance. I hope to continue to improve this game by making better use of these data points.
+
+The probabilities of success in this game do somewhat mirror the actual success rates of the particular players in real life. Even then, there is a lot of chance in this game, but the right strategy will improve your odds of winning. Good luck and have fun!
 
 ## Technologies
 List of technologies used for this game:
